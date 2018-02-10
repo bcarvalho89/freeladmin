@@ -1,0 +1,26 @@
+@import '~theme.scss';
+
+body{
+    margin:0px;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+
+.mat-primary {
+  color: mat-color($primary);
+}
+
+h4{
+  color: mat-color($primary, 600);
+}
+
+.mat-drawer{
+  background-color:#1e88e5!important;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]){
+  box-shadow: none!important;
+}
