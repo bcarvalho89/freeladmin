@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app.routing';
 import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,8 @@ import { MainModule } from './main/main.module';
     RouterModule,
     AppRoutingModule,
     LoginModule,
-    MainModule
+    MainModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
