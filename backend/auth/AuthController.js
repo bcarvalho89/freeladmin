@@ -15,7 +15,7 @@ router.post('/register', function(req, res) {
     email: req.body.email,
     password: hashedPassword
   }, function(err, user) {
-    if (err) return res.status(500).send('There was a problem registering the user.');
+    if (err) return res.status(500).send(res.__('USER.ERROR_CREATE'));
 
     // create a token
     var token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: 86400 /* 24 hours */ });
@@ -30,11 +30,11 @@ router.post('/register', function(req, res) {
 router.post('/login', function(req, res) {
 
   User.findOne({ email: req.body.email }, function(err, user) {
-    if (err) return res.status(500).send('Error on server.');
+    if (err) return res.status(500).send(res.__('MISC.SERVER_ERROR'));
     if (!user) return res.status(404).send({
       auth: false,
       token: null,
-      message: 'User not found'
+      message: res.__('USER.NOT_FOUND')
     });
 
     var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
@@ -43,7 +43,7 @@ router.post('/login', function(req, res) {
       return res.status(401).send({
         auth: false,
         token: null,
-        message: 'Invalid password'
+        message: res.__('LOGIN.INVALID_PASSWORD')
       });
     }
 
@@ -59,8 +59,8 @@ router.post('/login', function(req, res) {
 
 router.get('/me', VerifyToken, function(req, res) {
     User.findById(req.userId, { password: 0 /* remove password */}, function (err, user) {
-      if (err) return res.status(500).send("There was a problem finding the user.");
-      if (!user) return res.status(404).send("No user found.");
+      if (err) return res.status(500).send(res.__('USER.ERROR_FETCH_USER'));
+      if (!user) return res.status(404).send(res.__('USER.NOT_FOUND'));
 
       res.status(200).send(user);
 

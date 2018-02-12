@@ -1,0 +1,20 @@
+{
+	"MISC": {
+    "SALUTE": "API funcionando!",
+    "SERVER_ERROR": "Erro no servidor.",
+    "MISSING_TOKEN": "Nenhum token foi fornecido.",
+    "TOKEN_INVALID": "Token inválido."
+	},
+	"LOGIN": {
+    "INVALID_PASSWORD": "Senha inválida"
+  },
+  "USER": {
+    "ERROR_CREATE": "Erro ao registrar o usuário.",
+    "ERROR_FETCH_USER": "Erro ao encontrar o usuário.",
+    "ERROR_FETCH_USERS": "Erro ao encontrar os usuários.",
+    "ERROR_DELETE_USER": "Erro ao deleting o usuário.",
+    "ERROR_UPDATE_USER": "Erro ao updating o usuário.",
+    "NOT_FOUND": "Usuário não encontrado",
+    "SUCCESS_DELETED": "Usuário %s foi apagado."
+  }
+}
