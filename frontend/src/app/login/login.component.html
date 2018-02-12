@@ -1,26 +1,29 @@
 <div class="login">
-  <mat-card class="login__inner">
-    <div class="login-header">
-      <img src="/assets/images/logo.png" />
-      <h1>FreelAdmin</h1>
-    </div>
-    <mat-card-content>
-      <form [formGroup]="loginForm" novalidate>
-        <mat-form-field class="full-width">
-          <input matInput placeholder="E-mail" type="text" formControlName="email" required>
-          <mat-error>
-            {{ errors.email }}
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <input matInput formControlName="password" placeholder="{{ 'LOGIN.PASSWORD' | translate }}" required>
-          <mat-error>
-            {{ errors.passwordRequired }}
-          </mat-error>
-        </mat-form-field>
-      </form>
-    </mat-card-content>
+  <div class="login__inner">
+    <mat-card>
+      <div class="login-header">
+        <img src="/assets/images/logo.png" />
+        <h1>FreelAdmin</h1>
+      </div>
+      <mat-card-content>
+        <form [formGroup]="loginForm" novalidate>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="E-mail" type="text" formControlName="email" required>
+            <mat-error>
+              {{ errors.email }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="password" placeholder="{{ 'LOGIN.PASSWORD' | translate }}" required>
+            <mat-error>
+              {{ errors.passwordRequired }}
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
 
-    <button mat-raised-button class="login-submit full-width" [disabled]="loginForm.invalid" (click)="doLogin()" color="primary">{{ 'LOGIN.LOGIN' | translate }}</button>
-  </mat-card>
+      <button mat-raised-button class="login-submit full-width" [disabled]="loginForm.invalid" (click)="doLogin()" color="primary">{{ 'LOGIN.LOGIN' | translate }}</button>
+    </mat-card>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
+  </div>
 </div>
