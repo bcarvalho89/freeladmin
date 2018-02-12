@@ -22,7 +22,7 @@
   }
 
   &-header {
-    background-color: rgb(0,188,212);
+    background-color:#00BCD4;
     min-height: 160px;
     padding: 20px;
     text-align: center;
@@ -32,6 +32,12 @@
 
   &-submit {
     margin-top: 18px !important;
+  }
+
+  @media (max-width: 599px) {
+    &-header {
+      margin: 0 -16px;
+    }
   }
 }
 
