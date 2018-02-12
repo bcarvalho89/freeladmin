@@ -9,30 +9,30 @@ export class AuthenticationService {
   private username: string;
   private password: string;
 
-  private lastUser = {
-    user: null,
-    password: null
-  };
-
   private url = {
-    login: environment.API_URL + 'auth/login',
-    logout: environment.API_URL + 'auth/logout'
+    login: environment.API_URL + '/auth/login'
   };
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router) { }
 
-  login(username, password) {
-    const params = `username=${username}&password=${password}`;
-    this.lastUser.user = username;
-    this.lastUser.password = password;
+  login(email, password) {
+    const params = {
+      email,
+      password
+    };
 
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-
-    return this.http.post(this.url.login, params, {headers});
+    return this.http.post(this.url.login, params);
   }
 
   logout() {
+    const session = JSON.parse(sessionStorage.getItem('currentUser')) || null;
 
+    if (session) {
+      sessionStorage.clear();
+      this.router.navigate(['/login']);
+    }
   }
 
 }

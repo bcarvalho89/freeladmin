@@ -22,7 +22,9 @@ router.post('/', VerifyToken, function(req, res) {
 });
 
 // Listing all users
-router.get('/', function(req, res) {
+router.get('/', VerifyToken, function(req, res) {
+  console.log(req);
+
   User.find({}, { password: 0 }, function(err, users) {
     if (err) return res.status(500).send('There was a problem finding the users.');
 
@@ -31,7 +33,7 @@ router.get('/', function(req, res) {
 });
 
 // Get a single user
-router.get('/:id', function(req, res) {
+router.get('/:id', VerifyToken, function(req, res) {
   User.findById(req.params.id, { password: 0 }, function(err, user) {
     if (err) return res.status(500).send('There was a problem finding the user.');
     if (!user) return res.status(404).send('User not found');
@@ -41,7 +43,7 @@ router.get('/:id', function(req, res) {
 });
 
 // Delete a user
-router.delete('/:id', function(req, res) {
+router.delete('/:id', VerifyToken, function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
     if (err) return res.status(500).send('There was a problem deleting the user.');
 

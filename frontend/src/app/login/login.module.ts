@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -14,6 +15,8 @@ import { LoginComponent } from './login.component';
 import { LoginRouting } from './login.routing';
 
 import { AuthenticationService } from '../common/services/authentication.service';
+
+import { AuthGuard } from '../common/guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -26,13 +29,15 @@ import { AuthenticationService } from '../common/services/authentication.service
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
+    MatSnackBarModule,
     TranslateModule.forChild()
   ],
   declarations: [
     LoginComponent
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    AuthGuard
   ]
 })
 export class LoginModule { }
