@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { MatSidenav } from '@angular/material/sidenav';
 
 import { AuthenticationService } from '../common/services/authentication.service';
 import { UserService } from '../common/services/user.service';
@@ -10,12 +12,18 @@ import { UserService } from '../common/services/user.service';
 })
 export class MainComponent implements OnInit {
 
+  @ViewChild('sidenav') sidenav: MatSidenav;
+
+  private showMenuToggle = false;
+
   constructor(
     private authService: AuthenticationService,
     private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.sidenav.onOpen.subscribe(() => this.showMenuToggle = false);
+    this.sidenav.onClose.subscribe(() => this.showMenuToggle = true);
   }
 
   doLogout() {

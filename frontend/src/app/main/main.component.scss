@@ -1,0 +1,52 @@
+@import '~theme.scss';
+
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  max-width: 260px;
+  background-color: $cyan;
+
+  &-toolbar {
+    background-color: $cyan;
+    color: #fff;
+    justify-content: space-between;
+    box-shadow: 0 1px 0 rgba(0,0,0,.12);
+
+    &__brand {
+      display: flex;
+      align-items: center;
+    }
+
+    &__logo {
+      max-width: 24px;
+      max-height: 24px;
+      margin-right: 10px;
+    }
+
+    &__title {
+      font-weight: normal;
+    }
+  }
+}
+
+.toolbar {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  justify-content: space-between;
+
+  &-navigation {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.content {
+  padding: 16px;
+}

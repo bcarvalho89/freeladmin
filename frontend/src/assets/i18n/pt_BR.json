@@ -3,5 +3,8 @@
     "PASSWORD": "Senha",
     "EMAIL": "E-mail",
     "LOGIN": "Entrar"
+  },
+  "TOOLBAR": {
+    "LOGOUT": "SAIR"
   }
 }
