@@ -14,8 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MainComponent } from './main.component';
 import { MainRouting } from './main.routing';
 
-import { AuthService } from '../common/auth/auth.service';
-import { UserService } from '../common/services/user.service';
+import { ToolbarModule } from '../common/components/toolbar/toolbar.module';
 import { AuthInterceptor } from '../common/auth/auth.interceptor';
 
 @NgModule({
@@ -28,14 +27,13 @@ import { AuthInterceptor } from '../common/auth/auth.interceptor';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    ToolbarModule,
     TranslateModule.forChild()
   ],
   declarations: [
     MainComponent
   ],
   providers: [
-    AuthService,
-    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -6,5 +6,8 @@
   },
   "TOOLBAR": {
     "LOGOUT": "Logout"
+  },
+  "BREADCRUMB": {
+    "DASHBOARD": "DASHBOARD"
   }
 }

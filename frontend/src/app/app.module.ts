@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app.routing';
 
 import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -18,7 +19,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +27,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     LoginModule,
     MainModule,
+    DashboardModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({

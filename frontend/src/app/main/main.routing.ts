@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../common/guards/auth.guard';
 
 import { MainComponent } from './main.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 
 @NgModule({
@@ -14,6 +15,20 @@ import { MainComponent } from './main.component';
         component: MainComponent,
         canActivate: [AuthGuard],
         children: [
+          {
+            path: '',
+            component: DashboardComponent,
+            data: {
+              breadcrumb: 'BREADCRUMB.DASHBOARD'
+            }
+          },
+          {
+            path: '**',
+            component: DashboardComponent,
+            data: {
+              breadcrumb: 'BREADCRUMB.DASHBOARD'
+            }
+          }
         ]
       }
     ])

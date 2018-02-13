@@ -5,6 +5,9 @@
     "LOGIN": "Entrar"
   },
   "TOOLBAR": {
-    "LOGOUT": "SAIR"
+    "LOGOUT": "Sair"
+  },
+  "BREADCRUMB": {
+    "DASHBOARD": "Painel"
   }
 }
