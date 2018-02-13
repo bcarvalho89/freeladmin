@@ -7,14 +7,18 @@
     <app-breadcrumb></app-breadcrumb>
   </div>
   <div class="toolbar-actions">
-      <button mat-icon-button [matMenuTriggerFor]="languageMenu">
-        <mat-icon>public</mat-icon>
+    <button mat-icon-button (click)="toggleFullscreen()" *ngIf="fullScreenAvailable">
+      <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
+      <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="languageMenu">
+      <mat-icon>public</mat-icon>
+    </button>
+    <mat-menu #languageMenu="matMenu">
+      <button mat-menu-item *ngFor="let lang of translate.getLangs()" (click)="changeLanguage(lang)">
+        <span>{{ 'LANGUAGES.' + lang | uppercase | translate }}</span>
       </button>
-      <mat-menu #languageMenu="matMenu">
-        <button mat-menu-item *ngFor="let lang of translate.getLangs()" (click)="changeLanguage(lang)">
-          <span>{{ 'LANGUAGES.' + lang | uppercase | translate }}</span>
-        </button>
-      </mat-menu>
+    </mat-menu>
     <button mat-icon-button [matMenuTriggerFor]="moreMenu">
       <mat-icon>more_vert</mat-icon>
     </button>
