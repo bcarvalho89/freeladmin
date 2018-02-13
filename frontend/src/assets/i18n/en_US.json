@@ -8,6 +8,10 @@
     "LOGOUT": "Logout"
   },
   "BREADCRUMB": {
-    "DASHBOARD": "DASHBOARD"
+    "DASHBOARD": "Dashboard"
+  },
+  "LANGUAGES": {
+    "PT_BR": "Portuguese",
+    "EN_US": "English"
   }
 }

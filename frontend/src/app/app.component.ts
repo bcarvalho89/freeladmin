@@ -15,6 +15,9 @@ export class AppComponent {
   }
 
   initTranslate() {
+    this.translate.addLangs(['pt_BR', 'en_US']);
+    this.translate.setDefaultLang('pt_BR');
+
     if (this.translate.getBrowserLang() === 'pt') {
       this.translate.use('pt_BR');
     } else {

@@ -20,8 +20,6 @@ export class BreadcrumbComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.parseRoute(this.router.routerState.snapshot.root);
-
-    console.log();
   }
 
   ngOnInit() {
@@ -43,11 +41,9 @@ export class BreadcrumbComponent implements OnInit {
         return urlSegment.path;
       }).join('/');
 
-      this.translate.get(node.data['breadcrumb']).subscribe((string) => {
-        this.breadcrumbs.push({
-          name: string,
-          url: '/' + url
-        });
+      this.breadcrumbs.push({
+        name: node.data['breadcrumb'],
+        url: '/' + url
       });
     }
 

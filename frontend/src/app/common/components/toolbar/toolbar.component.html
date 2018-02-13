@@ -7,10 +7,18 @@
     <app-breadcrumb></app-breadcrumb>
   </div>
   <div class="toolbar-actions">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <button mat-icon-button [matMenuTriggerFor]="languageMenu">
+        <mat-icon>public</mat-icon>
+      </button>
+      <mat-menu #languageMenu="matMenu">
+        <button mat-menu-item *ngFor="let lang of translate.getLangs()" (click)="changeLanguage(lang)">
+          <span>{{ 'LANGUAGES.' + lang | uppercase | translate }}</span>
+        </button>
+      </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="moreMenu">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu #moreMenu="matMenu">
       <button mat-menu-item (click)="doLogout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>{{ 'TOOLBAR.LOGOUT' | translate }}</span>

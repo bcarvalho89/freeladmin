@@ -9,5 +9,9 @@
   },
   "BREADCRUMB": {
     "DASHBOARD": "Painel"
+  },
+  "LANGUAGES": {
+    "PT_BR": "Português",
+    "EN_US": "Inglês"
   }
 }
