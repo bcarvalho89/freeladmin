@@ -12,6 +12,7 @@ import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 import { ToolbarComponent } from './toolbar.component';
 
 import { AuthService } from '../../auth/auth.service';
+import { UserService } from '../../services/user.service';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { AuthService } from '../../auth/auth.service';
     ToolbarComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    UserService
   ]
 })
 export class ToolbarModule { }

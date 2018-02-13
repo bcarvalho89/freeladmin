@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AuthenticationService } from '../../services/authentication.service';
+import { UserService } from '../../services/user.service';
+
+import { User } from '../../domain/user/user';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,14 +17,21 @@ export class ToolbarComponent implements OnInit {
   public isFullscreen = false;
   public fullScreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled;
 
+  public isDataAvailable = false;
+
+  public user: User;
+
   constructor(
     private authService: AuthenticationService,
+    private userService: UserService,
     private translate: TranslateService) {
     }
 
   ngOnInit() {
     this.leftnav.onOpen.subscribe(() => this.showMenuTrigger = false);
     this.leftnav.onClose.subscribe(() => this.showMenuTrigger = true);
+
+    this.getMe();
   }
 
   private _requestFullScreen(element) {
@@ -57,6 +67,17 @@ export class ToolbarComponent implements OnInit {
     }
 
     this.isFullscreen = !this.isFullscreen;
+  }
+
+  getMe() {
+    this.userService.getProfile()
+    .subscribe((res: User) => {
+      this.user = res;
+      this.isDataAvailable = true;
+    }, (err => {
+      console.log('Deu ruim');
+      console.log(err);
+    }));
   }
 
 }

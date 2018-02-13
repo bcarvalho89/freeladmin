@@ -19,8 +19,9 @@
         <span>{{ 'LANGUAGES.' + lang | uppercase | translate }}</span>
       </button>
     </mat-menu>
-    <button mat-icon-button [matMenuTriggerFor]="moreMenu">
-      <mat-icon>more_vert</mat-icon>
+    <button mat-button [matMenuTriggerFor]="moreMenu" class="avatar" *ngIf="isDataAvailable">
+      <img src="{{ user.avatar }}" alt="{{ user.name }}">
+      {{ user.name }}
     </button>
     <mat-menu #moreMenu="matMenu">
       <button mat-menu-item (click)="doLogout()">

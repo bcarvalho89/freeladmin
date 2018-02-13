@@ -6,7 +6,8 @@ import { environment } from '../../../environments/environment';
 export class UserService {
 
   private url = {
-    users: environment.API_URL + '/users'
+    users: environment.API_URL + '/users',
+    profile: environment.API_URL + '/auth/me'
   };
 
   constructor(
@@ -14,5 +15,9 @@ export class UserService {
 
   public getUsers() {
     return this.http.get(this.url.users);
+  }
+
+  public getProfile() {
+    return this.http.get(this.url.profile);
   }
 }
