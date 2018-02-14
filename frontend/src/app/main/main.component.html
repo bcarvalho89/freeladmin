@@ -24,7 +24,7 @@
             <li *ngFor="let child of n.submenu">
               <a class="main-navigation__item" mat-button [routerLink]="child.link" routerLinkActive="main-navigation__item--active" [routerLinkActiveOptions]="{exact:
                 true}">
-                <span class="main-navigation__item-title">{{ 'MAIN_MENU.HOME' | translate }}</span>
+                <span class="main-navigation__item-title">{{ child.label | translate }}</span>
               </a>
             </li>
           </ul>

@@ -9,7 +9,9 @@
   },
   "BREADCRUMB": {
     "DASHBOARD": "Painel",
-    "PROFILE": "Perfil"
+    "PROFILE": "Perfil",
+    "USERS": "Usuários",
+    "SETTINGS": "Configurações"
   },
   "LANGUAGES": {
     "PT_BR": "Português",

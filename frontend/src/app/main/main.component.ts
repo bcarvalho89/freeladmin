@@ -14,32 +14,32 @@ export class MainComponent implements OnInit {
     this.menuList = [
       {
         label: 'MAIN_MENU.HOME',
-        link: [''],
+        link: ['/'],
         icon: 'home'
       },
       {
         label: 'MAIN_MENU.CONTACTS',
-        link: ['contacts'],
+        link: ['/contacts'],
         icon: 'account_box'
       },
       {
         label: 'MAIN_MENU.TODO',
-        link: ['todo'],
+        link: ['/todo'],
         icon: 'check_box'
       },
       {
         label: 'MAIN_MENU.CALENDAR',
-        link: ['calendar'],
+        link: ['/calendar'],
         icon: 'today'
       },
       {
         label: 'MAIN_MENU.PROJECTS',
-        link: ['projects'],
+        link: ['/projects'],
         icon: 'apps'
       },
       {
         label: 'MAIN_MENU.INVOICES',
-        link: ['invoices'],
+        link: ['/invoices'],
         icon: 'receipt'
       },
       {
@@ -48,7 +48,7 @@ export class MainComponent implements OnInit {
         submenu: [
           {
             label: 'MAIN_MENU.USERS',
-            link: ['']
+            link: ['/settings/users']
           }
         ]
       }

@@ -13,6 +13,7 @@ import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ProfileModule } from './profile/profile.module';
+import { UsersModule } from './users/users.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -30,6 +31,7 @@ export function createTranslateLoader(http: HttpClient) {
     MainModule,
     DashboardModule,
     ProfileModule,
+    UsersModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({

@@ -33,17 +33,20 @@ export class BreadcrumbComponent implements OnInit {
     if (node.data['breadcrumb']) {
 
       let urlSegments: UrlSegment[] = [];
+
       node.pathFromRoot.forEach(routerState => {
         urlSegments = urlSegments.concat(routerState.url);
       });
 
-      const url = urlSegments.map(urlSegment => {
-        return urlSegment.path;
-      }).join('/');
+      node.data['breadcrumb'].forEach(element => {
+        const url = urlSegments.map(urlSegment => {
+          return urlSegment.path;
+        }).join('/');
 
-      this.breadcrumbs.push({
-        name: node.data['breadcrumb'],
-        url: '/' + url
+        this.breadcrumbs.push({
+          name: element,
+          url: '/' + url
+        });
       });
     }
 
