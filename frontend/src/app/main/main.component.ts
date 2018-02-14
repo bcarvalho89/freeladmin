@@ -15,36 +15,43 @@ export class MainComponent implements OnInit {
       {
         label: 'MAIN_MENU.HOME',
         link: ['/'],
-        icon: 'home'
+        icon: 'home',
+        isOn: true
       },
       {
         label: 'MAIN_MENU.CONTACTS',
         link: ['/contacts'],
-        icon: 'account_box'
+        icon: 'account_box',
+        isOn: false
       },
       {
         label: 'MAIN_MENU.TODO',
         link: ['/todo'],
-        icon: 'check_box'
+        icon: 'check_box',
+        isOn: false
       },
       {
         label: 'MAIN_MENU.CALENDAR',
         link: ['/calendar'],
-        icon: 'today'
+        icon: 'today',
+        isOn: false
       },
       {
         label: 'MAIN_MENU.PROJECTS',
         link: ['/projects'],
-        icon: 'apps'
+        icon: 'apps',
+        isOn: false
       },
       {
         label: 'MAIN_MENU.INVOICES',
         link: ['/invoices'],
-        icon: 'receipt'
+        icon: 'receipt',
+        isOn: false
       },
       {
         label: 'MAIN_MENU.SETTINGS',
         icon: 'settings',
+        isOn: true,
         submenu: [
           {
             label: 'MAIN_MENU.USERS',

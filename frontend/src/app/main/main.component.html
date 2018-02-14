@@ -13,7 +13,8 @@
       </button>
     </mat-toolbar>
     <ul class="main-navigation">
-      <li *ngFor="let n of menuList" [ngClass]="{'is-opened': isActiveSubmenu(n.label)}">
+      <ng-container *ngFor="let n of menuList">
+      <li *ngIf="n.isOn" [ngClass]="{'is-opened': isActiveSubmenu(n.label)}">
         <ng-template [ngIf]="n.submenu">
           <button class="main-navigation__item" mat-button (click)="selectSubmenuItem(n.label)">
             <mat-icon class="main-navigation__item-icon">{{ n.icon }}</mat-icon>
@@ -37,6 +38,7 @@
           </a>
         </ng-template>
       </li>
+    </ng-container>
     </ul>
 
     <!-- <div class="main-navigation">
