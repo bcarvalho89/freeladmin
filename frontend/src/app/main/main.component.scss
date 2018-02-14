@@ -4,11 +4,9 @@
   width: 260px;
   min-width: 260px;
   max-width: 260px;
-  background-color: $cyan;
+  background-color: mat-color($primary);
 
   &-toolbar {
-    background-color: $cyan;
-    color: #fff;
     justify-content: space-between;
     box-shadow: 0 1px 0 rgba(0,0,0,.12);
 
@@ -42,18 +40,20 @@
 }
 
 .main-navigation {
+  color: mat-color($primary, lighter-contrast);
 
   &__item {
     width: 100%;
-    color: #fff;
     text-align: left;
     padding: 0 16px;
     height: 48px;
     display: flex;
     align-items: center;
+    font-weight: 400;
+    border-radius: 0;
 
     &--active {
-      background-color: blue;
+      background-color: mat-color($accent);
     }
 
     &-icon {

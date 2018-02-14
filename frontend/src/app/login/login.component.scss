@@ -1,3 +1,5 @@
+@import '~theme.scss';
+
 .login {
   position: fixed;
   display: flex;
@@ -30,12 +32,12 @@
   }
 
   &-header {
-    background-color:#00BCD4;
+    background-color: mat-color($accent);
     min-height: 160px;
     padding: 20px;
     text-align: center;
     margin: 0 -24px;
-    color: #fff;
+    color: mat-color($primary, lighter-contrast);
   }
 
   &-submit {

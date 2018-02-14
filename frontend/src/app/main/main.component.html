@@ -1,6 +1,6 @@
 <mat-sidenav-container class="container">
   <mat-sidenav #sidenav mode="side" class="sidebar" opened="true">
-    <mat-toolbar class="sidebar-toolbar">
+    <mat-toolbar class="sidebar-toolbar" color="primary">
       <div class="sidebar-toolbar__brand">
         <div class="sidebar-toolbar__logo">
             <img src="assets/icons/favicon.png">
@@ -46,9 +46,37 @@
     </div>
   </mat-sidenav>
 
-  <app-toolbar [leftnav]=sidenav></app-toolbar>
+  <app-toolbar [leftnav]="sidenav"></app-toolbar>
 
   <main class="content">
+      <!-- <button type="button" class="btn btn-primary"
+      (click)="isCollapsedContent = !isCollapsedContent">Show / Hide Content (Toggle collapse)
+</button>
+<hr>
+<div appCollapse="isCollapsedContent" class="card card-block card-header">
+<div class="well well-lg">
+ HTML content goes here !
+ <b>bold text</b> <br>
+ <span>this is a collapse example</span>
+</div>
+</div>
+
+<h3>Angular 2 Collapse HTML Content (IMAGE)</h3>
+<button type="button" class="btn btn-primary"
+      (click)="isCollapsedImage = !isCollapsedImage">Show / Hide Image (Toggle collapse)
+</button>
+<hr>
+<div appCollapse="isCollapsedImage" class="card card-block card-header">
+      <img src="http://www.angulartypescript.com/wp-content/uploads/2016/03/car3.jpg" alt="BMW 1">
+</div> -->
+<!-- <h2 (click)="isCollapsed = !isCollapsed">click here</h2>
+
+<div appCollapse="false" >
+  <div class="well">
+    panel panel panel
+  </div>
+</div> -->
+
     <router-outlet></router-outlet>
   </main>
 </mat-sidenav-container>

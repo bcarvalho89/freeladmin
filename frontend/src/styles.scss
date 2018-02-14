@@ -1,4 +1,4 @@
-@import '~theme.scss';
+// @import 'theme.scss';
 
 * {
   margin: 0;
@@ -46,3 +46,5 @@ img {
 // .mat-expansion-panel:not([class*=mat-elevation-z]){
 //   box-shadow: none!important;
 // }
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
