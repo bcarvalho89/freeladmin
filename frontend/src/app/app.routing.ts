@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule.forRoot([
       {
-        path: '',
+        path: 'login',
         redirectTo: '/login',
         pathMatch: 'full'
       }
-    ], { useHash: true })
+    ]/*, { useHash: true }*/)
   ]
 })
 export class AppRoutingModule {}

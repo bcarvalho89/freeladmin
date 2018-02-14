@@ -7,12 +7,11 @@ import { MainComponent } from './main.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ProfileComponent } from '../profile/profile.component';
 
-
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
-        path: 'main',
+        path: '',
         component: MainComponent,
         canActivate: [AuthGuard],
         children: [

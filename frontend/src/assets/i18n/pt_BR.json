@@ -17,5 +17,13 @@
   },
   "PROFILE": {
     "PROFILE": "Perfil"
+  },
+  "MAIN_MENU": {
+    "HOME": "Início",
+    "CONTACTS": "Contatos",
+    "TODO": "Tarefas",
+    "CALENDAR": "Calendário",
+    "PROJECTS": "Projetos",
+    "INVOICES": "Pedidos"
   }
 }

@@ -17,5 +17,13 @@
   },
   "PROFILE": {
     "PROFILE": "Profile"
+  },
+  "MAIN_MENU": {
+    "HOME": "Home",
+    "CONTACTS": "Contacts",
+    "TODO": "ToDo",
+    "CALENDAR": "Calendar",
+    "PROJECTS": "Projects",
+    "INVOICES": "Invoices"
   }
 }
