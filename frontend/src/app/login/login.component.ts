@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.token = currentUser && currentUser.token;
 
     if (this.token) {
-      this._router.navigate(['/main']);
+      this._router.navigate(['']);
     }
 
     this.createLoginForm();
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
 
         if (token) {
           sessionStorage.setItem('currentUser', JSON.stringify({ email: this.email, token: res.token }));
-          this._router.navigate(['/main']);
+          this._router.navigate(['']);
         }
 
         this.isLoading = false;
