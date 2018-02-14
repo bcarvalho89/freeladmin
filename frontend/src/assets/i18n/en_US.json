@@ -24,6 +24,8 @@
     "TODO": "ToDo",
     "CALENDAR": "Calendar",
     "PROJECTS": "Projects",
-    "INVOICES": "Invoices"
+    "INVOICES": "Invoices",
+    "SETTINGS": "Settings",
+    "USERS": "Users"
   }
 }

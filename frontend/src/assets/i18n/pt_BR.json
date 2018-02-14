@@ -24,6 +24,8 @@
     "TODO": "Tarefas",
     "CALENDAR": "Calendário",
     "PROJECTS": "Projetos",
-    "INVOICES": "Pedidos"
+    "INVOICES": "Pedidos",
+    "SETTINGS": "Configurações",
+    "USERS": "Usuários"
   }
 }
