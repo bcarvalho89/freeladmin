@@ -8,10 +8,14 @@
     "LOGOUT": "Sair"
   },
   "BREADCRUMB": {
-    "DASHBOARD": "Painel"
+    "DASHBOARD": "Painel",
+    "PROFILE": "Perfil"
   },
   "LANGUAGES": {
     "PT_BR": "Português",
     "EN_US": "Inglês"
+  },
+  "PROFILE": {
+    "PROFILE": "Perfil"
   }
 }

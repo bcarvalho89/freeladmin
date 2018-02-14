@@ -5,6 +5,7 @@ import { AuthGuard } from '../common/guards/auth.guard';
 
 import { MainComponent } from './main.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 
 @NgModule({
@@ -20,6 +21,13 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
             component: DashboardComponent,
             data: {
               breadcrumb: 'BREADCRUMB.DASHBOARD'
+            }
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent,
+            data: {
+              breadcrumb: 'BREADCRUMB.PROFILE'
             }
           },
           {

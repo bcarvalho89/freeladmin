@@ -1,5 +1,6 @@
 <div class="login">
   <div class="login__inner">
+    <mat-progress-bar class="login__loader" *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
     <mat-card>
       <div class="login-header">
         <img src="/assets/icons/logo.png" />
@@ -24,6 +25,5 @@
 
       <button mat-raised-button class="login-submit full-width" type="submit" [disabled]="loginForm.invalid" (click)="doLogin()" color="primary">{{ 'LOGIN.LOGIN' | translate }}</button>
     </mat-card>
-    <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
   </div>
 </div>

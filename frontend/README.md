@@ -6,11 +6,23 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 -----------------------------------------------------------------
 
-## Tecnologias e características
+## Características
 + Angular 5+
 + i18n
-+ Baseado no material design utilizando [Angular Material](https://material.angular.io/)
-+ Layout personalizado
++ Angular Material 2
++ Google Material Design
+
+## Aplicações inclusas
++ Contatos (Soon)
++ Todo (Soon)
++ Calendário (Soon)
+
+## Páginas
++ Autenticação
+  - Login
++ Perfil
++ Projetos (Soon)
++ Pedidos (Soon)
 
 -----------------------------------------------------------------
 

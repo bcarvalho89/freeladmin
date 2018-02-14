@@ -15,6 +15,14 @@
   &__inner {
     max-width: 400px;
     width: 100%;
+    position: relative;
+  }
+
+  &__loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 
   mat-card {

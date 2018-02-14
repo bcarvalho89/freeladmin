@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app.routing';
 import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { ProfileModule } from './profile/profile.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -28,6 +29,7 @@ export function createTranslateLoader(http: HttpClient) {
     LoginModule,
     MainModule,
     DashboardModule,
+    ProfileModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({
