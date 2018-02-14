@@ -40,45 +40,12 @@
       </li>
     </ng-container>
     </ul>
-
-    <!-- <div class="main-navigation">
-      <a class="main-navigation__item" mat-button [routerLink]="['']" routerLinkActive="main-navigation__item--active" [routerLinkActiveOptions]="{exact:
-        true}">
-        <mat-icon class="main-navigation__item-icon">home</mat-icon>
-        <span class="main-navigation__item-title">{{ 'MAIN_MENU.HOME' | translate }}</span>
-      </a>
-      <a class="main-navigation__item" mat-button [routerLink]="['contacts']" routerLinkActive="main-navigation__item--active" [routerLinkActiveOptions]="{exact:
-        true}">
-        <mat-icon class="main-navigation__item-icon">account_box</mat-icon>
-        <span class="main-navigation__item-title">{{ 'MAIN_MENU.CONTACTS' | translate }}</span>
-      </a>
-      <a class="main-navigation__item" mat-button [routerLink]="['todo']" routerLinkActive="main-navigation__item--active" [routerLinkActiveOptions]="{exact:
-        true}">
-        <mat-icon class="main-navigation__item-icon">check_box</mat-icon>
-        <span class="main-navigation__item-title">{{ 'MAIN_MENU.TODO' | translate }}</span>
-      </a>
-      <a class="main-navigation__item" mat-button [routerLink]="['calendar']" routerLinkActive="main-navigation__item--active" [routerLinkActiveOptions]="{exact:
-        true}">
-        <mat-icon class="main-navigation__item-icon">today</mat-icon>
-        <span class="main-navigation__item-title">{{ 'MAIN_MENU.CALENDAR' | translate }}</span>
-      </a>
-      <a class="main-navigation__item" mat-button [routerLink]="['projects']" routerLinkActive="main-navigation__item--active" [routerLinkActiveOptions]="{exact:
-        true}">
-        <mat-icon class="main-navigation__item-icon">apps</mat-icon>
-        <span class="main-navigation__item-title">{{ 'MAIN_MENU.PROJECTS' | translate }}</span>
-      </a>
-      <a class="main-navigation__item" mat-button [routerLink]="['invoices']" routerLinkActive="main-navigation__item--active" [routerLinkActiveOptions]="{exact:
-        true}">
-        <mat-icon class="main-navigation__item-icon">receipt</mat-icon>
-        <span class="main-navigation__item-title">{{ 'MAIN_MENU.INVOICES' | translate }}</span>
-      </a>
-    </div> -->
   </mat-sidenav>
 
   <app-toolbar [leftnav]="sidenav"></app-toolbar>
 
-  <main class="content">
-    <router-outlet></router-outlet>
+  <main class="content" [@routerTransition]="getState(o)">
+    <router-outlet #o="outlet"></router-outlet>
   </main>
 </mat-sidenav-container>
 

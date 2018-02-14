@@ -27,14 +27,16 @@ import { UsersComponent } from '../users/users.component';
             path: 'profile',
             component: ProfileComponent,
             data: {
-              breadcrumb: ['BREADCRUMB.PROFILE']
+              breadcrumb: ['BREADCRUMB.PROFILE'],
+              state: 'profile'
             }
           },
           {
             path: 'settings/users',
             component: UsersComponent,
             data: {
-              breadcrumb: ['BREADCRUMB.SETTINGS', 'BREADCRUMB.USERS']
+              breadcrumb: ['BREADCRUMB.SETTINGS', 'BREADCRUMB.USERS'],
+              state: 'settings/users'
             }
           },
           {

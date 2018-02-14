@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { routerTransition } from './main.animations';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
+  animations: [ routerTransition ],
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
@@ -71,6 +73,10 @@ export class MainComponent implements OnInit {
 
   isActiveSubmenu(item) {
     return this.selected === item;
+  }
+
+  getState(outlet) {
+    return outlet.activatedRouteData.state;
   }
 
 }
