@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { UsersComponent } from './users.component';
+import { UserService } from '../common/services/user.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { UsersComponent } from './users.component';
     UsersComponent
   ],
   providers: [
+    UserService
   ]
 })
 export class UsersModule { }

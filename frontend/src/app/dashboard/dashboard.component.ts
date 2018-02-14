@@ -17,14 +17,4 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getUsers() {
-    this.userService.getUsers()
-    .subscribe((res: any) => {
-      console.log(res);
-    }, (err => {
-      console.log('Deu ruim');
-      console.log(err);
-    }));
-  }
-
 }
