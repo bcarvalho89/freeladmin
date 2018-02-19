@@ -5,6 +5,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
+
 import { ContactService } from '../common/services/contact.service';
 
 import { ContactsComponent } from './contacts.component';
@@ -14,6 +20,10 @@ import { ContactsComponent } from './contacts.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
     TranslateModule.forChild()
   ],
   declarations: [

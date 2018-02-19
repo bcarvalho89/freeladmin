@@ -21,6 +21,9 @@
   "PROFILE": {
     "PROFILE": "Perfil"
   },
+  "CONTACTS": {
+    "FILTER": "Filtrar"
+  },
   "MAIN_MENU": {
     "HOME": "Início",
     "CONTACTS": "Contatos",

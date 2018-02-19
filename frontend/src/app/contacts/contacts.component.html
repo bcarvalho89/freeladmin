@@ -1,4 +1,31 @@
-<h2>Contact Register</h2>
+<div class="header-content">
+  <mat-form-field color="primary" floatLabel="never">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'CONTACTS.FILTER' | translate }}">
+    <span matSuffix><mat-icon>visibility</mat-icon></span>
+  </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let contact"> {{ contact.$key }} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let contact"> {{contact.name}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row matRipple (click)="showDetails(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<!-- <h2>Contact Register</h2>
 
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)">
   <input type="hidden" formControlName="$key" [(value)]="contactService.selectedContact.$key">
@@ -27,4 +54,4 @@
       </a>
     </td>
   </tr>
-</table>
+</table> -->
