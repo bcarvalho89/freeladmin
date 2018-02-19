@@ -1,0 +1,30 @@
+<h2>Contact Register</h2>
+
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)">
+  <input type="hidden" formControlName="$key" [(value)]="contactService.selectedContact.$key">
+  <div>
+    <label>Name</label>
+    <input formControlName="name" placeholder="Full Name" required>
+  </div>
+  <div>
+    <button type="submit" [disabled]="!contactForm.valid">Submit</button>
+    <button type="button" (click)="resetForm(contactForm)">Reset</button>
+  </div>
+</form>
+
+<table class="table table-sm table-hover">
+  <tr *ngFor="let contact of contactList">
+    <td>{{ contact.$key }} - {{contact.name}}</td>
+    <td>
+        <a class="btn" (click)="getDetails(contact.$key)">
+          detail
+        </a>
+      <a class="btn" (click)="onEdit(contact)">
+        edit
+      </a>
+      <a class="btn" (click)="onDelete(contact.$key)">
+        remove
+      </a>
+    </td>
+  </tr>
+</table>

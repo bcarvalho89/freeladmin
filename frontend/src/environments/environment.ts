@@ -5,5 +5,13 @@
 
 export const environment = {
   API_URL: 'http://localhost:3000/v1',
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyAqKDM4YrzEGQPRU172skaO-39eDbAmOx0",
+    authDomain: "cyborg-admin.firebaseapp.com",
+    databaseURL: "https://cyborg-admin.firebaseio.com",
+    projectId: "cyborg-admin",
+    storageBucket: "cyborg-admin.appspot.com",
+    messagingSenderId: "111546265752"
+  }
 };

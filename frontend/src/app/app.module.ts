@@ -6,6 +6,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { environment } from '../environments/environment';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 
@@ -14,6 +18,7 @@ import { MainModule } from './main/main.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ProfileModule } from './profile/profile.module';
 import { UsersModule } from './users/users.module';
+import { ContactsModule } from './contacts/contacts.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -32,6 +37,7 @@ export function createTranslateLoader(http: HttpClient) {
     DashboardModule,
     ProfileModule,
     UsersModule,
+    ContactsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -41,6 +47,8 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import { MainComponent } from './main.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { UsersComponent } from '../users/users.component';
+import { ContactsComponent } from '../contacts/contacts.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,14 @@ import { UsersComponent } from '../users/users.component';
             data: {
               breadcrumb: ['BREADCRUMB.PROFILE'],
               state: 'profile'
+            }
+          },
+          {
+            path: 'contacts',
+            component: ContactsComponent,
+            data: {
+              breadcrumb: ['BREADCRUMB.CONTACTS'],
+              state: 'contacts'
             }
           },
           {

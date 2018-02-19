@@ -11,7 +11,8 @@
     "DASHBOARD": "Dashboard",
     "PROFILE": "Profile",
     "USERS": "Users",
-    "SETTINGS": "Settings"
+    "SETTINGS": "Settings",
+    "CONTACTS": "Contacts"
   },
   "LANGUAGES": {
     "PT_BR": "Portuguese",

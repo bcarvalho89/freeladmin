@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
         label: 'MAIN_MENU.CONTACTS',
         link: ['/contacts'],
         icon: 'account_box',
-        isOn: false
+        isOn: true
       },
       {
         label: 'MAIN_MENU.TODO',
