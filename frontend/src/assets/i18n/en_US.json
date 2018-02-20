@@ -33,5 +33,8 @@
     "INVOICES": "Invoices",
     "SETTINGS": "Settings",
     "USERS": "Users"
+  },
+  "MISC": {
+    "DELETE": "Delete"
   }
 }

@@ -5,15 +5,19 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatTableModule,
+  MatIconModule,
+  MatMenuModule,
+  MatDialogModule
+} from '@angular/material';
 
 import { ContactService } from '../common/services/contact.service';
 
-import { ContactsComponent } from './contacts.component';
+import { ContactsComponent, DeleteContactDiaglog } from './contacts.component';
 
 @NgModule({
   imports: [
@@ -24,10 +28,15 @@ import { ContactsComponent } from './contacts.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatDialogModule,
     TranslateModule.forChild()
   ],
+  entryComponents: [ DeleteContactDiaglog ],
   declarations: [
-    ContactsComponent
+    ContactsComponent,
+    DeleteContactDiaglog
   ],
   providers: [
     ContactService

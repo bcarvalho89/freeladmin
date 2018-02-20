@@ -1,23 +1,36 @@
 <div class="header-content">
   <mat-form-field color="primary" floatLabel="never">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'CONTACTS.FILTER' | translate }}">
-    <span matSuffix><mat-icon>visibility</mat-icon></span>
+    <span matSuffix><mat-icon>search</mat-icon></span>
   </mat-form-field>
 </div>
 
-<div class="example-container mat-elevation-z8">
+<div class="mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource">
 
-    <!-- Position Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let contact"> {{ contact.$key }} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
       <mat-cell *matCellDef="let contact"> {{contact.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let contact">
+        <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #actionsMenu="matMenu">
+          <button mat-menu-item (click)="onDelete(contact.$key)">
+            <mat-icon>delete</mat-icon>
+            <span>{{ 'MISC.DELETE' | translate }}</span>
+          </button>
+        </mat-menu>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -25,7 +38,6 @@
   </mat-table>
 </div>
 
-<!-- <h2>Contact Register</h2>
 
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)">
   <input type="hidden" formControlName="$key" [(value)]="contactService.selectedContact.$key">
@@ -38,19 +50,13 @@
     <button type="button" (click)="resetForm(contactForm)">Reset</button>
   </div>
 </form>
-
+<!--
 <table class="table table-sm table-hover">
   <tr *ngFor="let contact of contactList">
     <td>{{ contact.$key }} - {{contact.name}}</td>
     <td>
-        <a class="btn" (click)="getDetails(contact.$key)">
-          detail
-        </a>
       <a class="btn" (click)="onEdit(contact)">
         edit
-      </a>
-      <a class="btn" (click)="onDelete(contact.$key)">
-        remove
       </a>
     </td>
   </tr>

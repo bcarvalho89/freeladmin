@@ -1,40 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
+
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { ContactService } from '../common/services/contact.service';
 import { Contact } from '../common/domain/contact/contact.model';
-
-export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: Element[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
 
 @Component({
   selector: 'app-contacts',
@@ -45,11 +17,11 @@ export class ContactsComponent implements OnInit {
 
   public contactForm: FormGroup;
 
-  contactList: Contact[];
+  // contactList: Contact[];
   public name: string;
 
-  dataSource;
-  displayedColumns = ['name'];
+  dataSource = new MatTableDataSource();
+  displayedColumns = ['name', 'actions'];
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -59,15 +31,16 @@ export class ContactsComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private contactService: ContactService
+    private contactService: ContactService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.createContactForm();
     this.contactService.getContacts()
     .subscribe(items => {
-      this.dataSource = new MatTableDataSource(items);
-      this.contactList = items;
+      console.log(items);
+      this.dataSource.data = items;
     });
   }
 
@@ -96,15 +69,20 @@ export class ContactsComponent implements OnInit {
   }
 
   onDelete(key: string) {
-    if (confirm('deseja remover') == true) {
-      this.contactService.deleteContact(key);
-    }
+    let dialogRef = this.dialog.open(DeleteContactDiaglog, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!!result) {
+        this.contactService.deleteContact(key);
+      }
+    });
   }
 
-  showDetails(key: string) {
-    console.log(key);
-  //  this.contactService.getContact(key).valueChanges()
-  // .subscribe(item => console.log(item));
+  showDetails(row) {
+   this.contactService.getContact(row.$key).valueChanges()
+  .subscribe(item => console.log(item));
   }
 
   resetForm(contactForm?: FormGroup) {
@@ -112,4 +90,27 @@ export class ContactsComponent implements OnInit {
       contactForm.reset();
     }
   }
+}
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  template: `<h1 mat-dialog-title>Confirm</h1>
+  <div mat-dialog-content>
+    <p>Are you sure you want to delete?</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button color="warn" mat-dialog-close="{{ true }}">Confirm</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+  </div>`,
+})
+export class DeleteContactDiaglog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteContactDiaglog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
