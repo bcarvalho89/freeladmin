@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Confirm</h1>
+<div mat-dialog-content>
+  <form [formGroup]="contactForm">
+    <div>
+      <label>Name</label>
+      <input formControlName="name" placeholder="Full Name" required>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" [mat-dialog-close]="contactForm">Save</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

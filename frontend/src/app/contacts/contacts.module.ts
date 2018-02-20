@@ -17,7 +17,9 @@ import {
 
 import { ContactService } from '../common/services/contact.service';
 
-import { ContactsComponent, DeleteContactDiaglog } from './contacts.component';
+import { ContactsComponent } from './contacts.component';
+import { DialogDelete } from './dialog-delete/dialog-delete.component';
+import { DialogContactForm } from './dialog-contact-form/dialog-contact-form.component';
 
 @NgModule({
   imports: [
@@ -33,10 +35,14 @@ import { ContactsComponent, DeleteContactDiaglog } from './contacts.component';
     MatDialogModule,
     TranslateModule.forChild()
   ],
-  entryComponents: [ DeleteContactDiaglog ],
+  entryComponents: [
+    DialogDelete,
+    DialogContactForm
+  ],
   declarations: [
     ContactsComponent,
-    DeleteContactDiaglog
+    DialogDelete,
+    DialogContactForm
   ],
   providers: [
     ContactService

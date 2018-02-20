@@ -8,6 +8,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ContactService } from '../common/services/contact.service';
 import { Contact } from '../common/domain/contact/contact.model';
 
+import { DialogDelete } from './dialog-delete/dialog-delete.component';
+import { DialogContactForm } from './dialog-contact-form/dialog-contact-form.component';
+
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -15,7 +18,7 @@ import { Contact } from '../common/domain/contact/contact.model';
 })
 export class ContactsComponent implements OnInit {
 
-  public contactForm: FormGroup;
+  // public contactForm: FormGroup;
 
   // contactList: Contact[];
   public name: string;
@@ -24,52 +27,53 @@ export class ContactsComponent implements OnInit {
   displayedColumns = ['name', 'actions'];
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 
   constructor(
-    private _fb: FormBuilder,
+    // private _fb: FormBuilder,
     private contactService: ContactService,
     public dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.createContactForm();
+    this.dataSource.data = [];
+    // this.createContactForm();
     this.contactService.getContacts()
     .subscribe(items => {
-      console.log(items);
+      // console.log(items);
       this.dataSource.data = items;
     });
   }
 
-  createContactForm() {
-    this.contactForm = this._fb.group({
-      $key: [{value: null, disabled: true}],
-      name: ['', [
-        Validators.required,
-      ]]
-    });
-  }
+  // createContactForm() {
+  //   this.contactForm = this._fb.group({
+  //     $key: [{value: null, disabled: true}],
+  //     name: ['', [
+  //       Validators.required,
+  //     ]]
+  //   });
+  // }
 
   onSubmit(contactForm: FormGroup) {
-    let key = this.contactForm.getRawValue().$key;
+    let key = contactForm.getRawValue().$key;
 
     if(key == null) {
       this.contactService.insertContact(contactForm.value);
     } else {
-      this.contactService.updateContact(key, this.contactForm.value);
+      this.contactService.updateContact(key, contactForm.value);
     }
     this.resetForm(contactForm);
   }
 
-  onEdit(contact: Contact, key) {
-    this.contactForm.setValue({ $key: contact.$key, ...contact });
-  }
+  // onEdit(contact: Contact, key) {
+  //   this.contactForm.setValue({ $key: contact.$key, ...contact });
+  // }
 
   onDelete(key: string) {
-    let dialogRef = this.dialog.open(DeleteContactDiaglog, {
+    let dialogRef = this.dialog.open(DialogDelete, {
       width: '250px'
     });
 
@@ -80,9 +84,31 @@ export class ContactsComponent implements OnInit {
     });
   }
 
+  openContactForm(data = {}): void {
+    // if (data.hasOwnProperty('$key')) {
+
+    // }
+    let dialogRef = this.dialog.open(DialogContactForm, {
+      width: '400px',
+      data: {
+        contact: data
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((form: FormGroup) => {
+      if (form && form.valid) {
+        this.onSubmit(form);
+      }
+    });
+  }
+
   showDetails(row) {
-   this.contactService.getContact(row.$key).valueChanges()
-  .subscribe(item => console.log(item));
+    // this.contactService.getContact(row.$key).valueChanges()
+    // .subscribe(item => {
+    //   // console.log('row subscribe');
+    //   const itemWithKey = { $key: row.$key, ...item };
+    //   this.openContactForm(itemWithKey);
+    // });
   }
 
   resetForm(contactForm?: FormGroup) {
@@ -90,27 +116,4 @@ export class ContactsComponent implements OnInit {
       contactForm.reset();
     }
   }
-}
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  template: `<h1 mat-dialog-title>Confirm</h1>
-  <div mat-dialog-content>
-    <p>Are you sure you want to delete?</p>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button color="warn" mat-dialog-close="{{ true }}">Confirm</button>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-  </div>`,
-})
-export class DeleteContactDiaglog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DeleteContactDiaglog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }

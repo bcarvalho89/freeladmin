@@ -5,7 +5,7 @@
   </mat-form-field>
 </div>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="dataSource.data.length > 0">
   <mat-table #table [dataSource]="dataSource">
 
     <ng-container matColumnDef="id">
@@ -34,30 +34,10 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row matRipple (click)="showDetails(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row matRipple (click)="openContactForm(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
 
-
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)">
-  <input type="hidden" formControlName="$key" [(value)]="contactService.selectedContact.$key">
-  <div>
-    <label>Name</label>
-    <input formControlName="name" placeholder="Full Name" required>
-  </div>
-  <div>
-    <button type="submit" [disabled]="!contactForm.valid">Submit</button>
-    <button type="button" (click)="resetForm(contactForm)">Reset</button>
-  </div>
-</form>
-<!--
-<table class="table table-sm table-hover">
-  <tr *ngFor="let contact of contactList">
-    <td>{{ contact.$key }} - {{contact.name}}</td>
-    <td>
-      <a class="btn" (click)="onEdit(contact)">
-        edit
-      </a>
-    </td>
-  </tr>
-</table> -->
+<button mat-fab class="add-contact" color="accent" (click)="openContactForm()">
+  <mat-icon>person_add</mat-icon>
+</button>
