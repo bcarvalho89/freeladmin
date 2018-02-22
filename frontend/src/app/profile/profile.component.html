@@ -1,3 +1,7 @@
-<p>
-  profile works!
-</p>
+<form [formGroup]="profileForm" (keyup.enter)="updateProfile()" novalidate>
+  <mat-form-field>
+    <input matInput placeholder="Nome" formControlName="displayName" required>
+  </mat-form-field>
+
+  <button mat-raised-button class="login-submit" type="submit" [disabled]="profileForm.invalid" (click)="updateProfile()" color="primary">Atualizar</button>
+</form>

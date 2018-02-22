@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { errorMessages } from '../common/validators';
 
 import { AuthenticationService } from '../common/services/authentication.service';
+import { UserService } from '../common/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -24,22 +25,18 @@ export class LoginComponent implements OnInit {
   public isLoading = false;
 
   constructor(
+    private userService: UserService,
     private _fb: FormBuilder,
     private _authService: AuthenticationService,
     private _router: Router,
-    private snackBar: MatSnackBar) {
-    this.createLoginForm();
-  }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
+    this.createLoginForm();
 
-    if (this.token) {
+    if (this.userService.isLogged) {
       this._router.navigate(['']);
     }
-
-    this.createLoginForm();
   }
 
   private createLoginForm() {
@@ -61,27 +58,22 @@ export class LoginComponent implements OnInit {
     this.email = this.loginForm.value.email;
     this.password = this.loginForm.value.password;
 
-    this._authService.login(this.email, this.password)
-      .subscribe((res: any) => {
+    this._authService.loginWithEmail(this.email, this.password)
+    .then(res => {
+      if (res) {
+        this._router.navigate(['']);
+      }
+      this.isLoading = false;
+    })
+    .catch(err => {
+      console.log('Deu ruim');
+      console.log(err);
 
-        const token = res && res.token;
-
-        if (token) {
-          sessionStorage.setItem('currentUser', JSON.stringify({ email: this.email, token: res.token }));
-          this._router.navigate(['']);
-        }
-
-        this.isLoading = false;
-
-      }, (err => {
-        console.log('Deu ruim');
-        console.log(err);
-
-        this.snackBar.open(err.error.message, 'OK', {
-          duration: 4000,
-        });
-        this.isLoading = false;
-      }));
+      this.snackBar.open(err.message, 'OK', {
+        duration: 4000,
+      });
+      this.isLoading = false;
+    });
   }
 
 }

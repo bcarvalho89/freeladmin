@@ -20,7 +20,7 @@ export class ToolbarComponent implements OnInit {
 
   public isDataAvailable = false;
 
-  public user: User;
+  public user;
 
   constructor(
     private authService: AuthenticationService,
@@ -32,7 +32,7 @@ export class ToolbarComponent implements OnInit {
     this.leftnav.onOpen.subscribe(() => this.showMenuTrigger = false);
     this.leftnav.onClose.subscribe(() => this.showMenuTrigger = true);
 
-    this.getMe();
+    this.getBasicInfo();
   }
 
   private _requestFullScreen(element) {
@@ -70,15 +70,26 @@ export class ToolbarComponent implements OnInit {
     this.isFullscreen = !this.isFullscreen;
   }
 
-  getMe() {
-    this.userService.getProfile()
-    .subscribe((res: User) => {
-      this.user = res;
-      this.isDataAvailable = true;
-    }, (err => {
-      console.log('Deu ruim');
-      console.log(err);
-    }));
+  getBasicInfo() {
+    this.user = this.userService.currentUserBasicInfo();
+    console.log(this.user);
   }
+
+  // getMe() {
+  //   this.user = this.userService.getProfileFirebase();
+  //   this.isDataAvailable = true;
+  //   // .subscribe(res => {
+  //   //   console.log(res);
+  //   //   // this.user = res.
+  //   // })
+  //   // this.userService.getProfile()
+  //   // .subscribe((res: User) => {
+  //   //   this.user = res;
+  //   //   this.isDataAvailable = true;
+  //   // }, (err => {
+  //   //   console.log('Deu ruim');
+  //   //   console.log(err);
+  //   // }));
+  // }
 
 }

@@ -1,23 +1,66 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+
+
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class UserService {
 
-  private url = {
-    users: environment.API_URL + '/users',
-    profile: environment.API_URL + '/auth/me'
-  };
-
   constructor(
-    private http: HttpClient) { }
+    private afAuth: AngularFireAuth
+  ) { }
 
-  public getUsers() {
-    return this.http.get(this.url.users);
+  public isLogged() {
+    this.afAuth.authState.subscribe(res => {
+      return true;
+    }, err => {
+      return false;
+    })
+  }
+
+  public currentUserBasicInfo() {
+    const userCurrent = this.getProfile();
+    const avatar = userCurrent.photoURL ? userCurrent.photoURL : '/assets/images/profile.jpg';
+
+    const userBasicInfo = {
+      name: userCurrent.displayName,
+      avatar
+    };
+
+    return userBasicInfo;
   }
 
   public getProfile() {
-    return this.http.get(this.url.profile);
+    return this.afAuth.auth.currentUser.providerData[0];
   }
+
+  public updateProfile(userData) {
+    return this.afAuth.auth.currentUser.updateProfile(userData);
+  }
+
+  // public getUsers() {
+  //   return this.http.get(this.url.users);
+  // }
+
+  // public getProfile() {
+  //   return this.http.get(this.url.profile);
+  // }
+
+  // public getProfileFirebase()/*: Observable<any>*/ {
+  //   this.auth.auth.currentUser.updateProfile({
+  //     displayName: 'TEste',
+  //     photoURL: null
+  //   });
+
+  //   console.log(this.auth.auth.currentUser);
+
+  //   // return this.auth.authState;
+
+  //   return {
+  //     name: 'Teste',
+  //     email: 'teste@teste',
+  //     avatar: ''
+  //   }
+  // }
 }

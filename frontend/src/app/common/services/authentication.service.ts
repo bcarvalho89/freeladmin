@@ -1,38 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class AuthenticationService {
   private token: string;
-  private username: string;
-  private password: string;
-
-  private url = {
-    login: environment.API_URL + '/auth/login'
-  };
 
   constructor(
-    private http: HttpClient,
-    private router: Router) { }
+    private router: Router,
+    private afAuth: AngularFireAuth
+  ) { }
 
-  login(email, password) {
-    const params = {
-      email,
-      password
-    };
-
-    return this.http.post(this.url.login, params);
+  loginWithEmail(email, password) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   logout() {
-    const session = JSON.parse(sessionStorage.getItem('currentUser')) || null;
-
-    if (session) {
-      sessionStorage.clear();
+    this.afAuth.auth.signOut()
+    .then(() => {
+      console.log('logged out');
       this.router.navigate(['/login']);
-    }
+    });
   }
-
 }

@@ -34,11 +34,11 @@ import { AuthInterceptor } from '../common/auth/auth.interceptor';
     MainComponent
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptor,
+    //   multi: true
+    // }
   ]
 })
 export class MainModule { }

@@ -19,7 +19,7 @@
         <span>{{ 'LANGUAGES.' + lang | uppercase | translate }}</span>
       </button>
     </mat-menu>
-    <button mat-button [matMenuTriggerFor]="moreMenu" class="avatar" *ngIf="isDataAvailable">
+    <button mat-button [matMenuTriggerFor]="moreMenu" class="avatar">
       <img src="{{ user.avatar }}" alt="{{ user.name }}">
       {{ user.name }}
     </button>
