@@ -5,6 +5,10 @@
   </mat-form-field>
 </div>
 
+<div *ngIf="dataSource.data.length === 0">
+  <h2>Nada para exibir aqui</h2>
+</div>
+
 <div class="mat-elevation-z8" *ngIf="dataSource.data.length > 0">
   <mat-table #table [dataSource]="dataSource">
 
@@ -15,11 +19,16 @@
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let contact"> {{contact.name}} </mat-cell>
+      <mat-cell *matCellDef="let contact">
+        <button mat-icon-button (click)="openContactForm(contact)" matTooltip="{{ 'CONTACTS.VIEW_CONTACT' | translate }}">
+          <mat-icon>perm_contact_calendar</mat-icon>
+        </button>
+        {{contact.name}}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let contact">
         <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
           <mat-icon>more_vert</mat-icon>
@@ -34,7 +43,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row matRipple (click)="openContactForm(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
 

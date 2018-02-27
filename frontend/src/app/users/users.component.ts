@@ -9,21 +9,21 @@ import { UserService } from '../common/services/user.service';
 })
 export class UsersComponent implements OnInit {
 
+  users: Array<any>;
+
   constructor(
     private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.getUsers();
   }
 
   getUsers() {
-    // this.userService.getUsers()
-    // .subscribe((res: any) => {
-    //   console.log(res);
-    // }, (err => {
-    //   console.log('Deu ruim');
-    //   console.log(err);
-    // }));
+    this.userService.getUsers()
+    .subscribe(res => {
+      this.users = res;
+    });
   }
 
 }

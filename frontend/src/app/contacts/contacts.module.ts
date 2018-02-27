@@ -12,7 +12,8 @@ import {
   MatTableModule,
   MatIconModule,
   MatMenuModule,
-  MatDialogModule
+  MatDialogModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { ContactService } from '../common/services/contact.service';
@@ -33,6 +34,7 @@ import { DialogContactForm } from './dialog-contact-form/dialog-contact-form.com
     MatMenuModule,
     MatButtonModule,
     MatDialogModule,
+    MatTooltipModule,
     TranslateModule.forChild()
   ],
   entryComponents: [

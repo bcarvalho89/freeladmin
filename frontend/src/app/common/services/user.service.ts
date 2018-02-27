@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap'
@@ -17,6 +17,8 @@ interface User {
 @Injectable()
 export class UserService {
   private _user: Observable<User>;
+  private itemsCollection: AngularFirestoreCollection<any>;
+  userList: Observable<any[]>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -41,56 +43,34 @@ export class UserService {
     })
   }
 
-  // public currentUserBasicInfo() {
-  //   const userCurrent = this.getProfile();
-  //   const avatar = userCurrent.photoURL ? userCurrent.photoURL : '/assets/images/profile.jpg';
-
-  //   const userBasicInfo = {
-  //     name: userCurrent.displayName,
-  //     avatar
-  //   };
-
-  //   return userBasicInfo;
-  // }
-
   public getProfile() {
     return this._user;
-    // this.afAuth.authState.subscribe(user => {
-    //   if (user) {
-    //     return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-    //   } else {
-    //     return Observable.of(null);
-    //   }
-    // });
-      // .switchMap(user => {
-      //   console.log(user);
-      //   if (user) {
-      //     return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
-      //   } else {
-      //     return Observable.of(null)
-      //   }
-      // });
-    // return this.afAuth.auth.currentUser.providerData[0];
   }
-
-  // public updateProfile(userData) {
-  //   return this.afAuth.auth.currentUser.updateProfile(userData);
-  // }
 
   public updateUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-
-    const avatar = user.photoURL ? user.photoURL : '/assets/images/profile.jpg';
 
     const data: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: avatar,
+      photoURL: user.photoURL,
       favoriteColor: user.favoriteColor
     }
 
     return userRef.set(data, { merge: true });
+  }
+
+  public getUsers() {
+    this.itemsCollection = this.afs.collection<any>('users');
+    this.userList = this.itemsCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        return data;
+      });
+    });
+
+    return this.userList;
   }
 
 }

@@ -6,7 +6,7 @@
   <p>favoriteColor: {{ user.favoriteColor }}</p>
   <p>profileURLImage: {{ profileUrl }}</p>
 
-  <img src="{{ profileUrl }}" />
+  <img src="{{ profileUrl | async }}" />
 
   <br><br><br><br><br><br>
 

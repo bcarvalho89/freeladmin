@@ -1,1 +1,3 @@
-<button (click)="getUsers()">Console users</button>
+<ul>
+  <li *ngFor="let user of users">{{ user.displayName }}</li>
+</ul>
