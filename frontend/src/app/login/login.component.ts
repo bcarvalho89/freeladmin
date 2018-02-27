@@ -60,9 +60,7 @@ export class LoginComponent implements OnInit {
 
     this._authService.loginWithEmail(this.email, this.password)
     .then(res => {
-      if (res) {
-        this._router.navigate(['']);
-      }
+      this._router.navigate(['']);
       this.isLoading = false;
     })
     .catch(err => {

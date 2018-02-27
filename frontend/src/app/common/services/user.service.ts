@@ -1,15 +1,37 @@
 import { Injectable } from '@angular/core';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
+import 'rxjs/add/operator/switchMap'
+
+interface User {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+  favoriteColor?: string;
+}
 
 @Injectable()
 export class UserService {
+  private _user: Observable<User>;
 
   constructor(
-    private afAuth: AngularFireAuth
-  ) { }
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore
+  ) {
+
+    this._user = this.afAuth.authState
+    .switchMap(user => {
+      if (user) {
+        return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+      } else {
+        return Observable.of(null)
+      }
+    });
+  }
 
   public isLogged() {
     this.afAuth.authState.subscribe(res => {
@@ -19,48 +41,56 @@ export class UserService {
     })
   }
 
-  public currentUserBasicInfo() {
-    const userCurrent = this.getProfile();
-    const avatar = userCurrent.photoURL ? userCurrent.photoURL : '/assets/images/profile.jpg';
+  // public currentUserBasicInfo() {
+  //   const userCurrent = this.getProfile();
+  //   const avatar = userCurrent.photoURL ? userCurrent.photoURL : '/assets/images/profile.jpg';
 
-    const userBasicInfo = {
-      name: userCurrent.displayName,
-      avatar
-    };
+  //   const userBasicInfo = {
+  //     name: userCurrent.displayName,
+  //     avatar
+  //   };
 
-    return userBasicInfo;
-  }
+  //   return userBasicInfo;
+  // }
 
   public getProfile() {
-    return this.afAuth.auth.currentUser.providerData[0];
+    return this._user;
+    // this.afAuth.authState.subscribe(user => {
+    //   if (user) {
+    //     return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+    //   } else {
+    //     return Observable.of(null);
+    //   }
+    // });
+      // .switchMap(user => {
+      //   console.log(user);
+      //   if (user) {
+      //     return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+      //   } else {
+      //     return Observable.of(null)
+      //   }
+      // });
+    // return this.afAuth.auth.currentUser.providerData[0];
   }
 
-  public updateProfile(userData) {
-    return this.afAuth.auth.currentUser.updateProfile(userData);
+  // public updateProfile(userData) {
+  //   return this.afAuth.auth.currentUser.updateProfile(userData);
+  // }
+
+  public updateUserData(user) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+
+    const avatar = user.photoURL ? user.photoURL : '/assets/images/profile.jpg';
+
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: avatar,
+      favoriteColor: user.favoriteColor
+    }
+
+    return userRef.set(data, { merge: true });
   }
 
-  // public getUsers() {
-  //   return this.http.get(this.url.users);
-  // }
-
-  // public getProfile() {
-  //   return this.http.get(this.url.profile);
-  // }
-
-  // public getProfileFirebase()/*: Observable<any>*/ {
-  //   this.auth.auth.currentUser.updateProfile({
-  //     displayName: 'TEste',
-  //     photoURL: null
-  //   });
-
-  //   console.log(this.auth.auth.currentUser);
-
-  //   // return this.auth.authState;
-
-  //   return {
-  //     name: 'Teste',
-  //     email: 'teste@teste',
-  //     avatar: ''
-  //   }
-  // }
 }

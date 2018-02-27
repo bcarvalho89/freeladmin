@@ -1,7 +1,26 @@
-<form [formGroup]="profileForm" (keyup.enter)="updateProfile()" novalidate>
-  <mat-form-field>
-    <input matInput placeholder="Nome" formControlName="displayName" required>
-  </mat-form-field>
+<div *ngIf="user">
+  <h2>{{ user.displayName }}</h2>
+  <p>uid: {{ user.uid }}</p>
+  <p>email: {{ user.email }}</p>
+  <p>photoURL: {{ user.photoURL }}</p>
+  <p>favoriteColor: {{ user.favoriteColor }}</p>
 
-  <button mat-raised-button class="login-submit" type="submit" [disabled]="profileForm.invalid" (click)="updateProfile()" color="primary">Atualizar</button>
-</form>
+  <br><br><br><br><br><br>
+
+  <form [formGroup]="profileForm" (keyup.enter)="updateProfile()" novalidate>
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="displayName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="E-mail" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Cor favorita" formControlName="favoriteColor">
+    </mat-form-field>
+
+    <button mat-raised-button class="login-submit" type="submit" [disabled]="profileForm.invalid" (click)="updateProfile()" color="primary">Atualizar</button>
+  </form>
+
+</div>

@@ -24,26 +24,32 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getProfileDetails();
-    this.createProfileForm();
   }
 
   getProfileDetails() {
-    this.user = this.userService.getProfile()
+    this.userService.getProfile()
+    .subscribe(res => {
+      this.user = res;
+      this.createProfileForm();
+    });
   }
 
   createProfileForm() {
     this.profileForm = this._fb.group({
+      uid: [{ value: this.user.uid, disabled: true }],
       displayName: [this.user.displayName, [
           Validators.required
-      ]]
+      ]],
+      email: [{ value: this.user.email, disabled: true }],
+      favoriteColor: [this.user.favoriteColor]
     });
   }
 
   updateProfile() {
     if (!this.profileForm.valid) { return; }
 
-    this.userService.updateProfile(this.profileForm.value)
-    .then(res => {
+    this.userService.updateUserData(this.profileForm.getRawValue())
+    .then(() => {
       this.snackBar.open('Atualizado com sucesso', 'OK', {
         duration: 4000,
       });

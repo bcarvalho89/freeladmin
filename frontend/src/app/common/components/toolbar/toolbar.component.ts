@@ -71,25 +71,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   getBasicInfo() {
-    this.user = this.userService.currentUserBasicInfo();
-    console.log(this.user);
+    this.userService.getProfile()
+    .subscribe(res => {
+      this.user = res;
+    });
   }
-
-  // getMe() {
-  //   this.user = this.userService.getProfileFirebase();
-  //   this.isDataAvailable = true;
-  //   // .subscribe(res => {
-  //   //   console.log(res);
-  //   //   // this.user = res.
-  //   // })
-  //   // this.userService.getProfile()
-  //   // .subscribe((res: User) => {
-  //   //   this.user = res;
-  //   //   this.isDataAvailable = true;
-  //   // }, (err => {
-  //   //   console.log('Deu ruim');
-  //   //   console.log(err);
-  //   // }));
-  // }
 
 }

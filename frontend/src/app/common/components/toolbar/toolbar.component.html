@@ -20,8 +20,8 @@
       </button>
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="moreMenu" class="avatar">
-      <img src="{{ user.avatar }}" alt="{{ user.name }}">
-      {{ user.name }}
+      <img src="{{ user?.photoURL }}" alt="{{ user?.displayName }}">
+      {{ user?.displayName }}
     </button>
     <mat-menu #moreMenu="matMenu" class="user-menu">
       <button mat-menu-item [routerLink]="['/profile']">
