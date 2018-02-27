@@ -5,6 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserService } from '../common/services/user.service';
 
+import { AngularFireStorage } from 'angularfire2/storage';
+import { Observable } from 'rxjs/Observable';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -13,13 +16,16 @@ import { UserService } from '../common/services/user.service';
 export class ProfileComponent implements OnInit {
 
   public profileForm: FormGroup;
+  uploadPercent: Observable<number>;
+  profileUrl: Observable<string | null>;
 
   public user;
 
   constructor(
     private userService: UserService,
     private _fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private afStorage: AngularFireStorage
   ) { }
 
   ngOnInit() {
@@ -36,17 +42,20 @@ export class ProfileComponent implements OnInit {
 
   createProfileForm() {
     this.profileForm = this._fb.group({
-      uid: [{ value: this.user.uid, disabled: true }],
+      uid: [{ value: this.user.uid ? this.user.uid : null, disabled: true }],
       displayName: [this.user.displayName, [
           Validators.required
       ]],
       email: [{ value: this.user.email, disabled: true }],
+      photoURL: [{ value: null, disabled: true }],
       favoriteColor: [this.user.favoriteColor]
     });
   }
 
   updateProfile() {
     if (!this.profileForm.valid) { return; }
+
+    console.log(this.profileForm.getRawValue());
 
     this.userService.updateUserData(this.profileForm.getRawValue())
     .then(() => {
@@ -61,6 +70,21 @@ export class ProfileComponent implements OnInit {
       this.snackBar.open(err.message, 'OK', {
         duration: 4000,
       });
+    });
+  }
+
+  upload(event) {
+    const uid = this.profileForm.get('uid').value;
+    const file = event.target.files[0];
+    const filePath = uid + '/profile';
+    const ref = this.afStorage.ref(filePath);
+    const task = ref.put(file, { customMetadata: { uid } });
+    this.uploadPercent = task.percentageChanges();
+
+    ref.getDownloadURL()
+    .subscribe(res => {
+      this.profileUrl = res;
+      this.profileForm.get('photoURL').setValue(res);
     });
   }
 
