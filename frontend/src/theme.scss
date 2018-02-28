@@ -10,4 +10,6 @@ $warn:    mat-palette($mat-red);
 
 $theme:   mat-light-theme($primary, $accent, $warn);
 
+$color--secodary-text: rgba(0, 0, 0,.54);
+
 @include angular-material-theme($theme);

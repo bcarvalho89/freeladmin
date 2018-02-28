@@ -17,10 +17,10 @@ export class ContactService {
   constructor(
     private firebase: AngularFirestore
   ) {
+    this.itemsCollection = this.firebase.collection<Contact>('contacts');
   }
 
   getContacts() {
-    this.itemsCollection = this.firebase.collection<Contact>('contacts');
     this.contactList = this.itemsCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Contact;
@@ -30,6 +30,10 @@ export class ContactService {
     });
 
     return this.contactList;
+  }
+
+  getSummary() {
+    return this.itemsCollection.snapshotChanges();
   }
 
   getContact(id) {

@@ -1,3 +1,9 @@
-<div class="block">&nbsp;</div>
-<div class="block">&nbsp;</div>
-<div class="block">&nbsp;</div>
+<div fxLayout="row wrap" fxLayoutAlign="start center">
+  <div fxFlex="33.3333" fxFlex.xs="100">
+    <mat-card class="widget">
+      <h4 class="widget__title"><mat-icon color="accent">account_box</mat-icon> Contacts</h4>
+      <p class="widget__number">{{ contactsSummary }}</p>
+    </mat-card>
+  </div>
+</div>
+
