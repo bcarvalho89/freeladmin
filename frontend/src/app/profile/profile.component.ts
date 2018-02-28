@@ -35,8 +35,16 @@ export class ProfileComponent implements OnInit {
   getProfileDetails() {
     this.userService.getProfile()
     .subscribe(res => {
-      this.user = res;
-      this.createProfileForm();
+      const profileUrlRef = this.afStorage.ref(res.photoURL);
+
+      profileUrlRef.getDownloadURL()
+      .subscribe(userImage => {
+        res = { avatar: userImage, ...res };
+
+        this.user = res;
+        this.createProfileForm();
+      });
+
     });
   }
 
@@ -84,7 +92,7 @@ export class ProfileComponent implements OnInit {
     ref.getDownloadURL()
     .subscribe(res => {
       this.profileUrl = res;
-      this.profileForm.get('photoURL').setValue(res);
+      this.profileForm.get('photoURL').setValue(filePath);
     });
   }
 

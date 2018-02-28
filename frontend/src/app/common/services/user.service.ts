@@ -12,6 +12,7 @@ interface User {
   photoURL?: string;
   displayName?: string;
   favoriteColor?: string;
+  avatar?: string;
 }
 
 @Injectable()
@@ -28,7 +29,7 @@ export class UserService {
     this._user = this.afAuth.authState
     .switchMap(user => {
       if (user) {
-        return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+        return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
       } else {
         return Observable.of(null)
       }

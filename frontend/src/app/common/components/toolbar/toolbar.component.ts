@@ -6,6 +6,9 @@ import { UserService } from '../../services/user.service';
 
 import { User } from '../../domain/user/user';
 
+
+import { AngularFireStorage } from 'angularfire2/storage';
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -25,7 +28,8 @@ export class ToolbarComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private userService: UserService,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private afStorage: AngularFireStorage) {
     }
 
   ngOnInit() {
@@ -73,7 +77,14 @@ export class ToolbarComponent implements OnInit {
   getBasicInfo() {
     this.userService.getProfile()
     .subscribe(res => {
-      this.user = res;
+      const profileUrlRef = this.afStorage.ref(res.photoURL);
+
+      profileUrlRef.getDownloadURL()
+      .subscribe(userImage => {
+        res = { avatar: userImage, ...res };
+
+        this.user = res;
+      });
     });
   }
 

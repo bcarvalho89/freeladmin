@@ -4,9 +4,11 @@
   <p>email: {{ user.email }}</p>
   <p>photoURL: {{ user.photoURL }}</p>
   <p>favoriteColor: {{ user.favoriteColor }}</p>
+  <p>avatar: {{ user.avatar }}</p>
   <p>profileURLImage: {{ profileUrl }}</p>
 
-  <img src="{{ profileUrl | async }}" />
+
+  <img src="{{ profileUrl }}" />
 
   <br><br><br><br><br><br>
 
