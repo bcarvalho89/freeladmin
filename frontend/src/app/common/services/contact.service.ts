@@ -1,6 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { Contact } from '../domain/contact/contact.model';
 
@@ -21,13 +23,13 @@ export class ContactService {
   }
 
   getContacts() {
-    this.contactList = this.itemsCollection.snapshotChanges().map(actions => {
+    this.contactList = this.itemsCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Contact;
         const $key = a.payload.doc.id;
         return { $key, ...data };
       });
-    });
+    }));
 
     return this.contactList;
   }

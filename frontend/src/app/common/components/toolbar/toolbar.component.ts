@@ -6,8 +6,9 @@ import { UserService } from '../../services/user.service';
 
 import { User } from '../../domain/user/user';
 
+import { MatSidenav  } from '@angular/material/sidenav';
 
-import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,10 +17,9 @@ import { AngularFireStorage } from 'angularfire2/storage';
   encapsulation: ViewEncapsulation.None
 })
 export class ToolbarComponent implements OnInit {
-  @Input() leftnav;
+  @Input() leftnav: MatSidenav;
   private showMenuTrigger = false;
   public isFullscreen = false;
-  public fullScreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled;
 
   public isDataAvailable = false;
 
@@ -33,8 +33,8 @@ export class ToolbarComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.leftnav.onOpen.subscribe(() => this.showMenuTrigger = false);
-    this.leftnav.onClose.subscribe(() => this.showMenuTrigger = true);
+    this.leftnav.openedStart.subscribe(() => this.showMenuTrigger = false);
+    this.leftnav.closedStart.subscribe(() => this.showMenuTrigger = true);
 
     this.getBasicInfo();
   }
@@ -48,11 +48,19 @@ export class ToolbarComponent implements OnInit {
   }
 
   private _exitFullScreen() {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
+    const fsDoc = <FsDocument> document;
+
+    if (fsDoc.exitFullscreen) {
+      fsDoc.exitFullscreen();
+    } else if (fsDoc.webkitExitFullscreen) {
+      fsDoc.webkitExitFullscreen();
     }
+  }
+
+  fullScreenAvailable() {
+    const fsDoc = <FsDocument> document;
+
+    return fsDoc.fullscreenEnabled || fsDoc.webkitFullscreenEnabled;
   }
 
   changeLanguage(code) {
@@ -88,4 +96,13 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
+}
+
+interface FsDocument extends HTMLDocument {
+  webkitFullscreenEnabled?: Boolean;
+  mozFullScreenElement?: Element;
+  msFullscreenElement?: Element;
+  webkitExitFullscreen?: () => void;
+  msExitFullscreen?: () => void;
+  mozCancelFullScreen?: () => void;
 }

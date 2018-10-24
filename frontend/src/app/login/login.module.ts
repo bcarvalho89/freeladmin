@@ -18,7 +18,7 @@ import { AuthenticationService } from '../common/services/authentication.service
 
 import { AuthGuard } from '../common/guards/auth.guard';
 
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @NgModule({
   imports: [

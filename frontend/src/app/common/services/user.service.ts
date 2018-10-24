@@ -1,10 +1,12 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
+
+import {map, switchMap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap'
 
 interface User {
   uid: string;
@@ -26,14 +28,14 @@ export class UserService {
     private afs: AngularFirestore
   ) {
 
-    this._user = this.afAuth.authState
-    .switchMap(user => {
+    this._user = this.afAuth.authState.pipe(
+    switchMap(user => {
       if (user) {
         return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
       } else {
-        return Observable.of(null)
+        return observableOf(null)
       }
-    });
+    }));
   }
 
   public isLogged() {
@@ -64,12 +66,12 @@ export class UserService {
 
   public getUsers() {
     this.itemsCollection = this.afs.collection<any>('users');
-    this.userList = this.itemsCollection.snapshotChanges().map(actions => {
+    this.userList = this.itemsCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data();
         return data;
       });
-    });
+    }));
 
     return this.userList;
   }
